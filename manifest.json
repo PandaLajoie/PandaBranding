@@ -1,37 +1,21 @@
 [
     {
-        "guid":  "8b77f51d-826d-490b-b126-26ea3a45ad7c",
-        "name":  "PandaBranding",
-        "description":  "Browser tab icon, home screen icon and app name for the web interface (requires File Transformation). / Icône d\u0027onglet, icône d\u0027écran d\u0027accueil et nom de l\u0027application dans l\u0027interface web (nécessite File Transformation).",
-        "overview":  "Replaces the browser tab icon, the home screen icon and the name \"Jellyfin\" in the web interface, without modifying Jellyfin\u0027s files. / Remplace l\u0027icône d\u0027onglet, l\u0027icône d\u0027écran d\u0027accueil et le nom « Jellyfin » dans l\u0027interface web, sans modifier les fichiers de Jellyfin.",
-        "owner":  "PandaLajoie",
-        "category":  "General",
-        "imageUrl":  "https://raw.githubusercontent.com/PandaLajoie/PandaBranding/main/images/logo.png",
-        "versions":  [
-                         {
-                             "version":  "0.1.2.0",
-                             "changelog":  "No icon is included anymore: send your own PNG in the plugin settings (without one, Jellyfin\u0027s icons are kept). / Plus aucune icône fournie : envoyez votre PNG dans les réglages du plugin (sans icône, celles de Jellyfin sont gardées).",
-                             "targetAbi":  "12.4.0.0",
-                             "sourceUrl":  "https://github.com/PandaLajoie/PandaBranding/releases/download/v0.1.2/pandabranding_0.1.2.0.zip",
-                             "checksum":  "269978150f62f3db851f3c8fe3adfa49",
-                             "timestamp":  "2026-11-05T00:48:34Z"
-                         },
-                         {
-                             "version":  "0.1.1.0",
-                             "changelog":  "Nothing is replaced by default: turn on the icon and the name in the plugin settings (existing settings are kept). / Rien n\u0027est remplacé par défaut : activez l\u0027icône et le nom dans les réglages du plugin (les réglages existants sont conservés).",
-                             "targetAbi":  "12.4.0.0",
-                             "sourceUrl":  "https://github.com/PandaLajoie/PandaBranding/releases/download/v0.1.1/pandabranding_0.1.1.0.zip",
-                             "checksum":  "5922385ce4b2b5e8c8919024cb479ad0",
-                             "timestamp":  "2026-11-05T00:42:09Z"
-                         },
-                         {
-                             "version":  "0.1.0.0",
-                             "changelog":  "First version. / Première version.",
-                             "targetAbi":  "12.4.0.0",
-                             "sourceUrl":  "https://github.com/PandaLajoie/PandaBranding/releases/download/v0.1.0/pandabranding_0.1.0.0.zip",
-                             "checksum":  "42b00754fa7a3d14251a28c9c6446541",
-                             "timestamp":  "2026-11-05T00:24:44Z"
-                         }
-                     ]
+        "guid": "8b77f51d-826d-490b-b126-26ea3a45ad7c",
+        "name": "PandaBranding",
+        "description": "Browser tab icon, home screen icon and app name for the web interface (requires File Transformation). / Icône d'onglet, icône d'écran d'accueil et nom de l'application dans l'interface web (nécessite File Transformation).",
+        "overview": "Replaces the browser tab icon, the home screen icon and the name \"Jellyfin\" in the web interface, without modifying Jellyfin's files. / Remplace l'icône d'onglet, l'icône d'écran d'accueil et le nom « Jellyfin » dans l'interface web, sans modifier les fichiers de Jellyfin.",
+        "owner": "PandaLajoie",
+        "category": "General",
+        "imageUrl": "https://raw.githubusercontent.com/PandaLajoie/PandaBranding/main/images/logo.png",
+        "versions": [
+            {
+                "version": "0.1.2.0",
+                "changelog": "No icon is included anymore: send your own PNG in the plugin settings (without one, Jellyfin's icons are kept). / Plus aucune icône fournie : envoyez votre PNG dans les réglages du plugin (sans icône, celles de Jellyfin sont gardées).",
+                "targetAbi": "12.4.0.0",
+                "sourceUrl": "https://github.com/PandaLajoie/PandaBranding/releases/download/v0.1.2/pandabranding_0.1.2.0.zip",
+                "checksum": "269978150f62f3db851f3c8fe3adfa49",
+                "timestamp": "2026-11-05T00:48:34Z"
+            }
+        ]
     }
 ]
