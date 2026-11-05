@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Concurrent;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -26,12 +23,7 @@ public class TransformRequest
 /// </summary>
 public static class Branding
 {
-    /// <summary>Tailles fournies avec le plugin (fichiers Resources/icon-{taille}.png).</summary>
-    public static readonly int[] Sizes = [32, 180, 192, 512];
-
     private static readonly byte[] PngSignature = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
-
-    private static readonly ConcurrentDictionary<int, byte[]> EmbeddedIcons = new();
 
     // Adresses relatives à /web/ (index.html et manifest.json y sont servis) : marche aussi avec une « URL de base ».
     private const string IconPath = "../PandaBranding/Icon";
@@ -76,42 +68,16 @@ public static class Branding
     public static bool IsPng(byte[] bytes) => bytes.Length > PngSignature.Length && bytes.AsSpan(0, PngSignature.Length).SequenceEqual(PngSignature);
 
     /// <summary>
-    /// Icône à servir pour une taille demandée : l'icône personnalisée (le navigateur la met à l'échelle) ou la tête de
-    /// panda de la taille la plus proche.
+    /// L'icône à servir (toutes tailles : le navigateur la met à l'échelle), ou null si l'administrateur n'en a pas
+    /// envoyé. Aucune icône n'est fournie avec le plugin.
     /// </summary>
-    public static byte[] GetIcon(int size, bool builtIn = false)
-    {
-        var custom = builtIn ? null : CustomIcon(Config);
-        if (custom != null)
-        {
-            return custom;
-        }
-
-        var best = Sizes.OrderBy(s => s < size ? int.MaxValue - s : s - size).First();
-        return EmbeddedIcons.GetOrAdd(best, s =>
-        {
-            using var stream = typeof(Branding).Assembly.GetManifestResourceStream($"{typeof(Branding).Namespace}.Resources.icon-{s}.png")
-                ?? throw new InvalidOperationException($"Icon {s} missing");
-            using var memory = new MemoryStream();
-            stream.CopyTo(memory);
-            return memory.ToArray();
-        });
-    }
+    public static byte[]? GetIcon() => CustomIcon(Config);
 
     /// <summary>
-    /// Marque de version des adresses d'icône : change quand l'icône change, pour que les navigateurs (qui gardent
-    /// très longtemps les icônes d'onglet) la rechargent.
+    /// Marque de version des adresses d'icône : empreinte de l'icône, pour que les navigateurs (qui gardent très
+    /// longtemps les icônes d'onglet) la rechargent quand elle change.
     /// </summary>
-    public static string IconVersion()
-    {
-        var custom = CustomIcon(Config);
-        if (custom == null)
-        {
-            return typeof(Branding).Assembly.GetName().Version?.ToString() ?? "0";
-        }
-
-        return Convert.ToHexString(SHA256.HashData(custom), 0, 6).ToLowerInvariant();
-    }
+    public static string IconVersion(byte[] icon) => Convert.ToHexString(SHA256.HashData(icon), 0, 6).ToLowerInvariant();
 
     private static string IconUrl(int size, string version) => $"{IconPath}?size={size}&v={version}";
 
@@ -157,9 +123,10 @@ public static class Branding
             return html;
         }
 
-        if (config.ReplaceIcons)
+        // Icônes remplacées seulement si l'administrateur a envoyé la sienne.
+        if (config.ReplaceIcons && CustomIcon(config) is { } icon)
         {
-            var v = WebUtility.HtmlEncode(IconVersion());
+            var v = WebUtility.HtmlEncode(IconVersion(icon));
             html = IconLinks.Replace(html, string.Empty);
             var links = $"<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"{IconUrl(32, v).Replace("&", "&amp;", StringComparison.Ordinal)}\">"
                 + $"<link rel=\"icon\" type=\"image/png\" sizes=\"192x192\" href=\"{IconUrl(192, v).Replace("&", "&amp;", StringComparison.Ordinal)}\">";
@@ -195,9 +162,9 @@ public static class Branding
             manifest["short_name"] = name;
         }
 
-        if (config.ReplaceIcons)
+        if (config.ReplaceIcons && CustomIcon(config) is { } icon)
         {
-            var v = IconVersion();
+            var v = IconVersion(icon);
             var icons = new JsonArray();
             foreach (var size in new[] { 192, 512 })
             {

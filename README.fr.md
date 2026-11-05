@@ -29,7 +29,8 @@ Les changements survivent aux mises à jour de Jellyfin.
 
 *Tableau de bord → Extensions → PandaBranding*. Rien n’est remplacé tant que vous ne l’activez pas :
 
-- **Icône** : la tête de panda fournie avec le plugin, ou votre propre PNG carré (512 × 512 conseillé, 1 Mo au plus).
+- **Icône** : votre propre PNG carré (512 × 512 conseillé, 1 Mo au plus). Aucune icône n’est fournie avec le plugin :
+  sans icône, celles de Jellyfin sont gardées.
 - **Nom** : le nom affiché à la place de « Jellyfin ». Une fois la page chargée, Jellyfin affiche lui-même le nom du
   serveur dans l'onglet.
 
@@ -49,7 +50,7 @@ docker run --rm -v "${PWD}\Jellyfin.Plugin.PandaBranding:/src" -w /src mcr.micro
 ```
 
 Installation manuelle : copiez `Jellyfin.Plugin.PandaBranding.dll`, `meta.json` et `images/logo.png` dans un
-dossier `PandaBranding_0.1.1.0` du dossier `plugins` de Jellyfin, puis redémarrez Jellyfin. Publier une version :
+dossier `PandaBranding_0.1.2.0` du dossier `plugins` de Jellyfin, puis redémarrez Jellyfin. Publier une version :
 `scripts/release.ps1 -Version 0.1.1 -Changelog "…"`.
 
 ## Licence

@@ -67,10 +67,10 @@
                     requires: 'Requires the File Transformation plugin. Applies to web browsers only (not to apps that bundle their own interface, such as Jellyfin for Tizen).',
                     iconTitle: 'Icon',
                     replaceIcons: 'Replace the tab and home screen icons',
-                    chooseIcon: 'Custom icon (PNG)',
-                    chooseIconHelp: 'Square PNG, ideally 512 × 512 with a transparent background, 1 MB at most. Without one, the panda head included with the plugin is used.',
-                    resetIcon: 'Use the default panda icon',
-                    iconDefault: 'Default icon (panda)',
+                    chooseIcon: 'Your icon (PNG)',
+                    chooseIconHelp: 'Square PNG, ideally 512 × 512 with a transparent background, 1 MB at most. Without an icon, Jellyfin\'s icons are kept.',
+                    resetIcon: 'Remove the icon',
+                    iconDefault: 'No icon: Jellyfin\'s icons are kept',
                     iconCustom: 'Custom icon',
                     iconNotPng: 'This file is not a PNG image.',
                     iconTooBig: 'This image is larger than 1 MB.',
@@ -86,10 +86,10 @@
                     requires: 'Nécessite le plugin File Transformation. S\'applique aux navigateurs seulement (pas aux applications qui embarquent leur propre interface, comme Jellyfin for Tizen).',
                     iconTitle: 'Icône',
                     replaceIcons: 'Remplacer l\'icône d\'onglet et d\'écran d\'accueil',
-                    chooseIcon: 'Icône personnalisée (PNG)',
-                    chooseIconHelp: 'PNG carré, idéalement 512 × 512 sur fond transparent, 1 Mo au plus. Sans icône personnalisée, la tête de panda fournie avec le plugin est utilisée.',
-                    resetIcon: 'Utiliser l\'icône panda par défaut',
-                    iconDefault: 'Icône par défaut (panda)',
+                    chooseIcon: 'Votre icône (PNG)',
+                    chooseIconHelp: 'PNG carré, idéalement 512 × 512 sur fond transparent, 1 Mo au plus. Sans icône, celles de Jellyfin sont gardées.',
+                    resetIcon: 'Retirer l\'icône',
+                    iconDefault: 'Aucune icône : celles de Jellyfin sont gardées',
                     iconCustom: 'Icône personnalisée',
                     iconNotPng: 'Ce fichier n\'est pas une image PNG.',
                     iconTooBig: 'Cette image dépasse 1 Mo.',
@@ -104,7 +104,7 @@
 
             var PandaBrandingConfig = {
                 pluginUniqueId: '8b77f51d-826d-490b-b126-26ea3a45ad7c',
-                // Icône en cours d'édition (base64 sans en-tête) ; '' = icône par défaut.
+                // Icône en cours d'édition (base64 sans en-tête) ; '' = pas d'icône (celles de Jellyfin).
                 icon: ''
             };
 
@@ -127,14 +127,17 @@
             }
 
             function pandaBrandingShowPreview() {
-                // Icône par défaut : demandée avec builtIn, sinon le serveur renverrait l'icône enregistrée.
-                var src = PandaBrandingConfig.icon
-                    ? 'data:image/png;base64,' + PandaBrandingConfig.icon
-                    : ApiClient.getUrl('PandaBranding/Icon', { size: 192, builtIn: true });
-                document.querySelector('#PandaBrandingPreview').src = src;
-                document.querySelector('#PandaBrandingPreviewSmall').src = PandaBrandingConfig.icon
-                    ? src
-                    : ApiClient.getUrl('PandaBranding/Icon', { size: 32, builtIn: true });
+                // Aperçu de l'icône en cours d'édition (pas encore enregistrée) ; rien sans icône.
+                var icon = PandaBrandingConfig.icon;
+                ['#PandaBrandingPreview', '#PandaBrandingPreviewSmall'].forEach(function (selector) {
+                    var img = document.querySelector(selector);
+                    if (icon) {
+                        img.src = 'data:image/png;base64,' + icon;
+                    } else {
+                        img.removeAttribute('src');
+                    }
+                    img.style.display = icon ? '' : 'none';
+                });
                 document.querySelector('#PandaBrandingIconSource').textContent =
                     pandaBrandingT(PandaBrandingConfig.icon ? 'iconCustom' : 'iconDefault');
             }

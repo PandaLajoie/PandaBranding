@@ -24,8 +24,8 @@ public class PluginConfiguration : BasePluginConfiguration
     public string AppName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets une icône PNG choisie par l'administrateur, en base64. Vide : la tête de panda fournie avec le
-    /// plugin.
+    /// Gets or sets une icône PNG choisie par l'administrateur, en base64. Vide : les icônes de Jellyfin ne sont pas
+    /// remplacées (aucune icône n’est fournie avec le plugin).
     /// </summary>
     public string CustomIconPng { get; set; } = string.Empty;
 }
