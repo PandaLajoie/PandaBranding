@@ -1,0 +1,16 @@
+{
+  "category": "General",
+  "changelog": "First version. / Première version.",
+  "description": "Browser tab icon, home screen icon and app name for the web interface (requires File Transformation). / Icône d'onglet, icône d'écran d'accueil et nom de l'application dans l'interface web (nécessite File Transformation).",
+  "guid": "8b77f51d-826d-490b-b126-26ea3a45ad7c",
+  "name": "PandaBranding",
+  "overview": "Replaces the browser tab icon, the home screen icon and the name \"Jellyfin\" in the web interface, without modifying Jellyfin's files. / Remplace l'icône d'onglet, l'icône d'écran d'accueil et le nom « Jellyfin » dans l'interface web, sans modifier les fichiers de Jellyfin.",
+  "owner": "PandaLajoie",
+  "targetAbi": "12.4.0.0",
+  "timestamp": "2026-11-04T00:00:00.0000000Z",
+  "version": "0.1.0.0",
+  "status": "Active",
+  "autoUpdate": false,
+  "imagePath": "logo.png",
+  "assemblies": []
+}

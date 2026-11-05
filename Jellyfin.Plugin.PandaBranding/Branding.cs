@@ -141,9 +141,18 @@ public static class Branding
         }
     }
 
+    /// <summary>
+    /// Vrai pour le document index.html lui-même. Le motif « index.html » est une expression régulière (le point
+    /// accepte tout caractère) : File Transformation nous passe aussi d'autres fichiers, comme
+    /// <c>session-login-index-html.….chunk.js</c> (la page de connexion). Les modifier casserait l'interface.
+    /// </summary>
+    public static bool IsIndexDocument(string text) =>
+        text.Contains("<!doctype html", StringComparison.OrdinalIgnoreCase)
+        && text.Contains("</head>", StringComparison.OrdinalIgnoreCase);
+
     public static string PatchIndex(string html, PluginConfiguration config)
     {
-        if (string.IsNullOrEmpty(html))
+        if (string.IsNullOrEmpty(html) || !IsIndexDocument(html))
         {
             return html;
         }
@@ -154,8 +163,7 @@ public static class Branding
             html = IconLinks.Replace(html, string.Empty);
             var links = $"<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"{IconUrl(32, v).Replace("&", "&amp;", StringComparison.Ordinal)}\">"
                 + $"<link rel=\"icon\" type=\"image/png\" sizes=\"192x192\" href=\"{IconUrl(192, v).Replace("&", "&amp;", StringComparison.Ordinal)}\">";
-            var head = html.IndexOf("</head>", StringComparison.OrdinalIgnoreCase);
-            html = head >= 0 ? html.Insert(head, links) : links + html;
+            html = html.Insert(html.IndexOf("</head>", StringComparison.OrdinalIgnoreCase), links);
             html = AppleIcon.Replace(html, m => m.Groups[1].Value + IconUrl(180, v).Replace("&", "&amp;", StringComparison.Ordinal) + m.Groups[2].Value);
         }
 
@@ -172,7 +180,10 @@ public static class Branding
 
     public static string PatchManifest(string json, PluginConfiguration config)
     {
-        if (string.IsNullOrWhiteSpace(json) || JsonNode.Parse(json) is not JsonObject manifest)
+        // Même prudence que pour index.html : seulement un vrai manifeste d'application web (objet JSON avec
+        // start_url), jamais un autre fichier reconnu par le motif.
+        if (string.IsNullOrWhiteSpace(json) || !json.TrimStart().StartsWith('{')
+            || JsonNode.Parse(json) is not JsonObject manifest || !manifest.ContainsKey("start_url"))
         {
             return json;
         }

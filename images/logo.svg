@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="559" viewBox="0 0 1024 559">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="70%">
+      <stop offset="0" stop-color="#11283d"/>
+      <stop offset="0.55" stop-color="#08121c"/>
+      <stop offset="1" stop-color="#03060a"/>
+    </radialGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5cc8ff"/>
+      <stop offset="0.5" stop-color="#1e90ff"/>
+      <stop offset="1" stop-color="#0a5bd6"/>
+    </linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#122334"/>
+      <stop offset="1" stop-color="#070d14"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="559" fill="url(#bg)"/>
+  <!-- halo bleu derrière l'emblème -->
+  <circle cx="500" cy="190" r="150" fill="#1e90ff" opacity="0.18" filter="url(#softglow)"/>
+
+  <g filter="url(#glow)">
+    <!-- oreilles -->
+    <circle cx="418" cy="104" r="40" fill="url(#dark)" stroke="url(#blue)" stroke-width="11"/>
+    <circle cx="582" cy="104" r="40" fill="url(#dark)" stroke="url(#blue)" stroke-width="11"/>
+    <!-- tête -->
+    <circle cx="500" cy="190" r="108" fill="url(#dark)" stroke="url(#blue)" stroke-width="20"/>
+    <!-- taches des yeux -->
+    <ellipse cx="458" cy="180" rx="27" ry="37" transform="rotate(28 458 180)" fill="#04080d" stroke="url(#blue)" stroke-width="5"/>
+    <ellipse cx="542" cy="180" rx="27" ry="37" transform="rotate(-28 542 180)" fill="#04080d" stroke="url(#blue)" stroke-width="5"/>
+    <circle cx="463" cy="176" r="8" fill="#e8f6ff"/>
+    <circle cx="537" cy="176" r="8" fill="#e8f6ff"/>
+    <!-- museau -->
+    <path d="M484 226 Q500 216 516 226 Q512 240 500 244 Q488 240 484 226 Z" fill="#04080d" stroke="url(#blue)" stroke-width="5"/>
+    <path d="M500 244 L500 256 M486 262 Q500 270 514 262" fill="none" stroke="url(#blue)" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- badge : un onglet de navigateur avec un pinceau (le rôle du plugin : l'icône et le nom de l'onglet) -->
+  <g filter="url(#glow)" transform="translate(566 184)">
+    <path d="M0 22 Q0 10 12 10 L58 10 Q66 10 70 18 L76 30 L118 30 Q130 30 130 42 L130 104 Q130 116 118 116 L12 116 Q0 116 0 104 Z"
+          fill="#0a1826" stroke="url(#blue)" stroke-width="7" stroke-linejoin="round"/>
+    <line x1="4" y1="44" x2="126" y2="44" stroke="url(#blue)" stroke-width="4" opacity="0.8"/>
+    <circle cx="18" cy="27" r="6" fill="#5cc8ff"/>
+    <rect x="28" y="23" width="30" height="8" rx="4" fill="#5cc8ff" opacity="0.75"/>
+    <!-- pinceau -->
+    <g transform="rotate(-38 66 82)">
+      <rect x="60" y="44" width="12" height="40" rx="5" fill="#e8f6ff"/>
+      <rect x="58" y="82" width="16" height="8" rx="2" fill="#5cc8ff"/>
+      <path d="M58 90 L74 90 Q74 104 66 112 Q58 104 58 90 Z" fill="#1e90ff"/>
+    </g>
+  </g>
+
+  <text x="512" y="392" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-weight="800"
+        font-size="100" letter-spacing="2" fill="#ffffff">PANDA</text>
+  <text x="512" y="452" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-weight="700"
+        font-size="48" letter-spacing="6" fill="#ffffff">BRANDING</text>
+</svg>

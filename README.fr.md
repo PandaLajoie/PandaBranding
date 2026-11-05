@@ -41,7 +41,8 @@ rouvrez l'onglet.
 docker run --rm -v "${PWD}\Jellyfin.Plugin.PandaBranding:/src" -w /src mcr.microsoft.com/dotnet/sdk:10.0 dotnet publish -c Release -o /src/bin/publish
 ```
 
-Copiez `Jellyfin.Plugin.PandaBranding.dll` dans un dossier `PandaBranding_0.1.0.0` du dossier `plugins` de Jellyfin,
+Copiez `Jellyfin.Plugin.PandaBranding.dll`, `meta.json` et `images/logo.png` dans un dossier `PandaBranding_0.1.0.0`
+du dossier `plugins` de Jellyfin,
 puis redémarrez Jellyfin.
 
 ## Licence

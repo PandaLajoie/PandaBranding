@@ -39,7 +39,7 @@ Browsers keep tab icons for a long time: after a change, reload the page (Ctrl+F
 docker run --rm -v "${PWD}\Jellyfin.Plugin.PandaBranding:/src" -w /src mcr.microsoft.com/dotnet/sdk:10.0 dotnet publish -c Release -o /src/bin/publish
 ```
 
-Copy `Jellyfin.Plugin.PandaBranding.dll` into a `PandaBranding_0.1.0.0` folder in Jellyfin's `plugins` folder, then
+Copy `Jellyfin.Plugin.PandaBranding.dll`, `meta.json` and `images/logo.png` into a `PandaBranding_0.1.0.0` folder in Jellyfin's `plugins` folder, then
 restart Jellyfin.
 
 ## License
