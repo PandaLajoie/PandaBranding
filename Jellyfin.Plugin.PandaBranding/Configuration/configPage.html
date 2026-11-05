@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PandaBranding</title>
+</head>
+<body>
+    <div id="PandaBrandingConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-checkbox">
+        <style>
+            #PandaBrandingConfigPage .pbPreview { display: flex; align-items: center; gap: 1.5em; margin: 1em 0; }
+            #PandaBrandingConfigPage .pbPreview img { width: 96px; height: 96px; object-fit: contain; background: #2a2a2a; border-radius: 12px; padding: 8px; }
+            #PandaBrandingConfigPage .pbPreview .pbSmall { width: 32px; height: 32px; padding: 4px; border-radius: 6px; }
+            #PandaBrandingConfigPage .pbWarning { color: #f2b01e; }
+        </style>
+        <div data-role="content">
+            <div class="content-primary">
+                <h2>PandaBranding</h2>
+                <!-- Textes remplis selon la langue de l'interface Jellyfin (data-i18n → PandaBrandingText). -->
+                <p data-i18n="intro"></p>
+                <p class="pbWarning" data-i18n="requires"></p>
+                <form id="PandaBrandingConfigForm">
+                    <h3 data-i18n="iconTitle"></h3>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="ReplaceIcons" type="checkbox" is="emby-checkbox" />
+                            <span data-i18n="replaceIcons"></span>
+                        </label>
+                    </div>
+                    <div class="pbPreview">
+                        <img id="PandaBrandingPreview" alt="" />
+                        <img id="PandaBrandingPreviewSmall" class="pbSmall" alt="" />
+                        <span id="PandaBrandingIconSource"></span>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="PandaBrandingFile" data-i18n="chooseIcon"></label>
+                        <input id="PandaBrandingFile" type="file" accept="image/png" />
+                        <div class="fieldDescription" data-i18n="chooseIconHelp"></div>
+                    </div>
+                    <button is="emby-button" type="button" id="PandaBrandingResetIcon" class="raised button-cancel block">
+                        <span data-i18n="resetIcon"></span>
+                    </button>
+
+                    <h3 data-i18n="nameTitle"></h3>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="ReplaceName" type="checkbox" is="emby-checkbox" />
+                            <span data-i18n="replaceName"></span>
+                        </label>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="AppName" data-i18n="appName"></label>
+                        <input id="AppName" type="text" is="emby-input" maxlength="60" />
+                        <div class="fieldDescription" data-i18n="appNameHelp"></div>
+                    </div>
+
+                    <button is="emby-button" type="submit" class="raised button-submit block">
+                        <span data-i18n="save"></span>
+                    </button>
+                    <p class="fieldDescription" data-i18n="afterSave"></p>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var PandaBrandingText = {
+                en: {
+                    intro: 'Replaces Jellyfin\'s browser tab icon, home screen icon (phone shortcut, installed web app) and app name in the web interface. Jellyfin\'s files are not modified: changes are applied as pages are sent.',
+                    requires: 'Requires the File Transformation plugin. Applies to web browsers only (not to apps that bundle their own interface, such as Jellyfin for Tizen).',
+                    iconTitle: 'Icon',
+                    replaceIcons: 'Replace the tab and home screen icons',
+                    chooseIcon: 'Custom icon (PNG)',
+                    chooseIconHelp: 'Square PNG, ideally 512 × 512 with a transparent background, 1 MB at most. Without one, the panda head included with the plugin is used.',
+                    resetIcon: 'Use the default panda icon',
+                    iconDefault: 'Default icon (panda)',
+                    iconCustom: 'Custom icon',
+                    iconNotPng: 'This file is not a PNG image.',
+                    iconTooBig: 'This image is larger than 1 MB.',
+                    nameTitle: 'Name',
+                    replaceName: 'Replace the name "Jellyfin"',
+                    appName: 'App name',
+                    appNameHelp: 'Shown in the tab while the page loads (Jellyfin then shows the server name) and as the name of the installed web app.',
+                    save: 'Save',
+                    afterSave: 'After saving, reload the page (Ctrl+F5). Browsers keep tab icons for a long time: if the old one stays, close and reopen the tab.'
+                },
+                fr: {
+                    intro: 'Remplace l\'icône d\'onglet de Jellyfin, l\'icône d\'écran d\'accueil (raccourci sur un téléphone, application web installée) et le nom de l\'application dans l\'interface web. Les fichiers de Jellyfin ne sont pas modifiés : les changements sont appliqués à l\'envoi des pages.',
+                    requires: 'Nécessite le plugin File Transformation. S\'applique aux navigateurs seulement (pas aux applications qui embarquent leur propre interface, comme Jellyfin for Tizen).',
+                    iconTitle: 'Icône',
+                    replaceIcons: 'Remplacer l\'icône d\'onglet et d\'écran d\'accueil',
+                    chooseIcon: 'Icône personnalisée (PNG)',
+                    chooseIconHelp: 'PNG carré, idéalement 512 × 512 sur fond transparent, 1 Mo au plus. Sans icône personnalisée, la tête de panda fournie avec le plugin est utilisée.',
+                    resetIcon: 'Utiliser l\'icône panda par défaut',
+                    iconDefault: 'Icône par défaut (panda)',
+                    iconCustom: 'Icône personnalisée',
+                    iconNotPng: 'Ce fichier n\'est pas une image PNG.',
+                    iconTooBig: 'Cette image dépasse 1 Mo.',
+                    nameTitle: 'Nom',
+                    replaceName: 'Remplacer le nom « Jellyfin »',
+                    appName: 'Nom de l\'application',
+                    appNameHelp: 'Affiché dans l\'onglet pendant le chargement de la page (Jellyfin affiche ensuite le nom du serveur) et comme nom de l\'application web installée.',
+                    save: 'Enregistrer',
+                    afterSave: 'Après l\'enregistrement, rechargez la page (Ctrl+F5). Les navigateurs gardent longtemps les icônes d\'onglet : si l\'ancienne reste, fermez et rouvrez l\'onglet.'
+                }
+            };
+
+            var PandaBrandingConfig = {
+                pluginUniqueId: '8b77f51d-826d-490b-b126-26ea3a45ad7c',
+                // Icône en cours d'édition (base64 sans en-tête) ; '' = icône par défaut.
+                icon: ''
+            };
+
+            function pandaBrandingLang() {
+                var lang = (document.documentElement.lang || navigator.language || 'en').toLowerCase();
+                return lang.indexOf('fr') === 0 ? 'fr' : 'en';
+            }
+
+            // Langue de l'interface Jellyfin (posée sur <html lang> par jellyfin-web) ; anglais par défaut.
+            function pandaBrandingT(key) {
+                var texts = PandaBrandingText[pandaBrandingLang()];
+                return texts[key] || PandaBrandingText.en[key] || key;
+            }
+
+            function pandaBrandingTranslate(page) {
+                page.querySelectorAll('[data-i18n]').forEach(function (el) {
+                    // Textes fixes de ce fichier : textContent suffit.
+                    el.textContent = pandaBrandingT(el.getAttribute('data-i18n'));
+                });
+            }
+
+            function pandaBrandingShowPreview() {
+                // Icône par défaut : demandée avec builtIn, sinon le serveur renverrait l'icône enregistrée.
+                var src = PandaBrandingConfig.icon
+                    ? 'data:image/png;base64,' + PandaBrandingConfig.icon
+                    : ApiClient.getUrl('PandaBranding/Icon', { size: 192, builtIn: true });
+                document.querySelector('#PandaBrandingPreview').src = src;
+                document.querySelector('#PandaBrandingPreviewSmall').src = PandaBrandingConfig.icon
+                    ? src
+                    : ApiClient.getUrl('PandaBranding/Icon', { size: 32, builtIn: true });
+                document.querySelector('#PandaBrandingIconSource').textContent =
+                    pandaBrandingT(PandaBrandingConfig.icon ? 'iconCustom' : 'iconDefault');
+            }
+
+            document.querySelector('#PandaBrandingConfigPage').addEventListener('pageshow', function () {
+                var page = this;
+                pandaBrandingTranslate(page);
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(PandaBrandingConfig.pluginUniqueId).then(function (config) {
+                    document.querySelector('#ReplaceIcons').checked = config.ReplaceIcons;
+                    document.querySelector('#ReplaceName').checked = config.ReplaceName;
+                    document.querySelector('#AppName').value = config.AppName || '';
+                    PandaBrandingConfig.icon = config.CustomIconPng || '';
+                    pandaBrandingShowPreview();
+                }).finally(function () {
+                    Dashboard.hideLoadingMsg();
+                });
+            });
+
+            document.querySelector('#PandaBrandingFile').addEventListener('change', function () {
+                var file = this.files && this.files[0];
+                if (!file) {
+                    return;
+                }
+
+                if (file.size > 1024 * 1024) {
+                    Dashboard.alert(pandaBrandingT('iconTooBig'));
+                    this.value = '';
+                    return;
+                }
+
+                var input = this;
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var bytes = new Uint8Array(reader.result);
+                    // Signature PNG : 89 50 4E 47 0D 0A 1A 0A (le serveur vérifie aussi).
+                    var png = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
+                    if (bytes.length < 8 || png.some(function (b, i) { return bytes[i] !== b; })) {
+                        Dashboard.alert(pandaBrandingT('iconNotPng'));
+                        input.value = '';
+                        return;
+                    }
+
+                    var binary = '';
+                    for (var i = 0; i < bytes.length; i++) {
+                        binary += String.fromCharCode(bytes[i]);
+                    }
+                    PandaBrandingConfig.icon = btoa(binary);
+                    pandaBrandingShowPreview();
+                };
+                reader.readAsArrayBuffer(file);
+            });
+
+            document.querySelector('#PandaBrandingResetIcon').addEventListener('click', function () {
+                PandaBrandingConfig.icon = '';
+                document.querySelector('#PandaBrandingFile').value = '';
+                pandaBrandingShowPreview();
+            });
+
+            document.querySelector('#PandaBrandingConfigForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(PandaBrandingConfig.pluginUniqueId).then(function (config) {
+                    config.ReplaceIcons = document.querySelector('#ReplaceIcons').checked;
+                    config.ReplaceName = document.querySelector('#ReplaceName').checked;
+                    config.AppName = document.querySelector('#AppName').value.trim();
+                    config.CustomIconPng = PandaBrandingConfig.icon;
+                    ApiClient.updatePluginConfiguration(PandaBrandingConfig.pluginUniqueId, config).then(function (result) {
+                        Dashboard.processPluginConfigurationUpdateResult(result);
+                        pandaBrandingShowPreview();
+                    });
+                });
+                return false;
+            });
+        </script>
+    </div>
+</body>
+</html>
