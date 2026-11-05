@@ -17,6 +17,13 @@ Jellyfin updates.
 - Jellyfin 12.4.
 - The **File Transformation** plugin, installed and active.
 
+## Installation
+
+1. Install **File Transformation** (repository `https://www.iamparadox.dev/jellyfin/plugins/manifest.json`).
+2. *Dashboard → Plugins → Repositories → +*: add
+   `https://raw.githubusercontent.com/PandaLajoie/PandaBranding/main/manifest.json`
+3. *Catalog → PandaBranding → Install*, then restart Jellyfin.
+
 ## Settings
 
 *Dashboard → Plugins → PandaBranding*:
@@ -39,8 +46,9 @@ Browsers keep tab icons for a long time: after a change, reload the page (Ctrl+F
 docker run --rm -v "${PWD}\Jellyfin.Plugin.PandaBranding:/src" -w /src mcr.microsoft.com/dotnet/sdk:10.0 dotnet publish -c Release -o /src/bin/publish
 ```
 
-Copy `Jellyfin.Plugin.PandaBranding.dll`, `meta.json` and `images/logo.png` into a `PandaBranding_0.1.0.0` folder in Jellyfin's `plugins` folder, then
-restart Jellyfin.
+Manual install: copy `Jellyfin.Plugin.PandaBranding.dll`, `meta.json` and `images/logo.png` into a
+`PandaBranding_0.1.0.0` folder in Jellyfin's `plugins` folder, then restart Jellyfin. Release:
+`scripts/release.ps1 -Version 0.1.1 -Changelog "…"`.
 
 ## License
 

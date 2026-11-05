@@ -18,6 +18,13 @@ Les changements survivent aux mises à jour de Jellyfin.
 - Jellyfin 12.4.
 - Le plugin **File Transformation**, installé et actif.
 
+## Installation
+
+1. Installez **File Transformation** (dépôt `https://www.iamparadox.dev/jellyfin/plugins/manifest.json`).
+2. *Tableau de bord → Extensions → Dépôts → +* : ajoutez
+   `https://raw.githubusercontent.com/PandaLajoie/PandaBranding/main/manifest.json`
+3. *Catalogue → PandaBranding → Installer*, puis redémarrez Jellyfin.
+
 ## Réglages
 
 *Tableau de bord → Extensions → PandaBranding* :
@@ -41,9 +48,9 @@ rouvrez l'onglet.
 docker run --rm -v "${PWD}\Jellyfin.Plugin.PandaBranding:/src" -w /src mcr.microsoft.com/dotnet/sdk:10.0 dotnet publish -c Release -o /src/bin/publish
 ```
 
-Copiez `Jellyfin.Plugin.PandaBranding.dll`, `meta.json` et `images/logo.png` dans un dossier `PandaBranding_0.1.0.0`
-du dossier `plugins` de Jellyfin,
-puis redémarrez Jellyfin.
+Installation manuelle : copiez `Jellyfin.Plugin.PandaBranding.dll`, `meta.json` et `images/logo.png` dans un
+dossier `PandaBranding_0.1.0.0` du dossier `plugins` de Jellyfin, puis redémarrez Jellyfin. Publier une version :
+`scripts/release.ps1 -Version 0.1.1 -Changelog "…"`.
 
 ## Licence
 
