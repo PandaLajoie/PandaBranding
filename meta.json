@@ -1,6 +1,6 @@
 {
   "category": "General",
-  "changelog": "First version. / Première version.",
+  "changelog": "Nothing is replaced by default: turn on the icon and the name in the plugin settings (existing settings are kept). / Rien n'est remplacé par défaut : activez l'icône et le nom dans les réglages du plugin (les réglages existants sont conservés).",
   "description": "Browser tab icon, home screen icon and app name for the web interface (requires File Transformation). / Icône d'onglet, icône d'écran d'accueil et nom de l'application dans l'interface web (nécessite File Transformation).",
   "guid": "8b77f51d-826d-490b-b126-26ea3a45ad7c",
   "name": "PandaBranding",
@@ -8,7 +8,7 @@
   "owner": "PandaLajoie",
   "targetAbi": "12.4.0.0",
   "timestamp": "2026-11-04T00:00:00.0000000Z",
-  "version": "0.1.0.0",
+  "version": "0.1.1.0",
   "status": "Active",
   "autoUpdate": false,
   "imagePath": "logo.png",

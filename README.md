@@ -26,7 +26,7 @@ Jellyfin updates.
 
 ## Settings
 
-*Dashboard → Plugins → PandaBranding*:
+*Dashboard → Plugins → PandaBranding*. Nothing is replaced until you turn it on:
 
 - **Icon**: the panda head included with the plugin, or your own square PNG (512 × 512 recommended, 1 MB at most).
 - **Name**: the name shown instead of "Jellyfin". Once a page has loaded, Jellyfin itself shows the server name in the
@@ -47,7 +47,7 @@ docker run --rm -v "${PWD}\Jellyfin.Plugin.PandaBranding:/src" -w /src mcr.micro
 ```
 
 Manual install: copy `Jellyfin.Plugin.PandaBranding.dll`, `meta.json` and `images/logo.png` into a
-`PandaBranding_0.1.0.0` folder in Jellyfin's `plugins` folder, then restart Jellyfin. Release:
+`PandaBranding_0.1.1.0` folder in Jellyfin's `plugins` folder, then restart Jellyfin. Release:
 `scripts/release.ps1 -Version 0.1.1 -Changelog "…"`.
 
 ## License
