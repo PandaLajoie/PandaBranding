@@ -9,6 +9,14 @@
         "imageUrl":  "https://raw.githubusercontent.com/PandaLajoie/PandaBranding/main/images/logo.png",
         "versions":  [
                          {
+                             "version":  "0.1.1.0",
+                             "changelog":  "Nothing is replaced by default: turn on the icon and the name in the plugin settings (existing settings are kept). / Rien n\u0027est remplacé par défaut : activez l\u0027icône et le nom dans les réglages du plugin (les réglages existants sont conservés).",
+                             "targetAbi":  "12.4.0.0",
+                             "sourceUrl":  "https://github.com/PandaLajoie/PandaBranding/releases/download/v0.1.1/pandabranding_0.1.1.0.zip",
+                             "checksum":  "5922385ce4b2b5e8c8919024cb479ad0",
+                             "timestamp":  "2026-11-05T00:42:09Z"
+                         },
+                         {
                              "version":  "0.1.0.0",
                              "changelog":  "First version. / Première version.",
                              "targetAbi":  "12.4.0.0",
